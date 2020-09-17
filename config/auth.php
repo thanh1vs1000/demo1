@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+//đây là đoạn mình thêm vào dùng để xác thực
+        'company_user' => [
+            'driver' => 'session',
+            'provider' => 'company_users',
+        ],
+        'company_users-api' => [
+            'driver' => 'token',
+            'provider' => 'company_users',
+
+        ],
     ],
 
     /*
@@ -69,6 +79,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        //truy suất dữ liệu cho bảng
+        'company_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CompanyUser::class,
         ],
 
         // 'users' => [
@@ -95,6 +110,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'company_users' => [
+            'provider' => 'company_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
